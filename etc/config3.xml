@@ -1,0 +1,62 @@
+<config>
+  <service name="timber">
+    <listen ip="127.0.0.1:8121"></listen>
+    <group name="timbergroup" scheduler="roundr" enable="true">
+      <host name="host01" ip="127.0.0.1:8081" weight="5"></host>
+      <host name="host02" ip="127.0.0.1:8082" weight="5"></host>
+      <host name="host03" ip="127.0.0.1:8083" weight="5"></host>
+      <!--<host name="host04" ip="127.0.0.1:8084" weight="5"></host>
+      <host name="host05" ip="127.0.0.1:8085" weight="5"></host>
+      <host name="host06" ip="127.0.0.1:8086" weight="5"></host>
+      <host name="host07" ip="127.0.0.1:8087" weight="5"></host>
+      <host name="host08" ip="127.0.0.1:8088" weight="5"></host>
+      <host name="host09" ip="127.0.0.1:8089" weight="5"></host>
+      <host name="host10" ip="127.0.0.1:8090" weight="5"></host>
+      <host name="host11" ip="127.0.0.1:8091" weight="5"></host>
+      <host name="host12" ip="127.0.0.1:8092" weight="5"></host>
+      <host name="host13" ip="127.0.0.1:8093" weight="5"></host>
+      <host name="host14" ip="127.0.0.1:8094" weight="5"></host>
+      <host name="host15" ip="127.0.0.1:8095" weight="5"></host>
+      <host name="host16" ip="127.0.0.1:8096" weight="5"></host>
+      <host name="host17" ip="127.0.0.1:8097" weight="5"></host>
+      <host name="host18" ip="127.0.0.1:8098" weight="5"></host>
+      <host name="host19" ip="127.0.0.1:8099" weight="5"></host>
+      <host name="host20" ip="127.0.0.1:8100" weight="5"></host>
+      <host name="host21" ip="127.0.0.1:8101" weight="5"></host>
+      <host name="host22" ip="127.0.0.1:8102" weight="5"></host>
+      <host name="host23" ip="127.0.0.1:8103" weight="5"></host>
+      <host name="host24" ip="127.0.0.1:8104" weight="5"></host>
+      <host name="host25" ip="127.0.0.1:8105" weight="5"></host>
+      <host name="host26" ip="127.0.0.1:8106" weight="5"></host>
+      <host name="host27" ip="127.0.0.1:8107" weight="5"></host>
+      <host name="host28" ip="127.0.0.1:8108" weight="5"></host>
+      <host name="host29" ip="127.0.0.1:8109" weight="5"></host>
+      <host name="host30" ip="127.0.0.1:8110" weight="5"></host>
+      <host name="host31" ip="127.0.0.1:8111" weight="5"></host>
+      <host name="host32" ip="127.0.0.1:8112" weight="5"></host>
+      <host name="host33" ip="127.0.0.1:8113" weight="5"></host>
+      <host name="host34" ip="127.0.0.1:8114" weight="5"></host>
+      <host name="host35" ip="127.0.0.1:8115" weight="5"></host>
+      <host name="host36" ip="127.0.0.1:8116" weight="5"></host>
+      <host name="host37" ip="127.0.0.1:8117" weight="5"></host>
+      <host name="host38" ip="127.0.0.1:8118" weight="5"></host>
+      <host name="host39" ip="127.0.0.1:8119" weight="5"></host>
+      <host name="host40" ip="127.0.0.1:8120" weight="5"></host>-->
+    </group>
+  </service>
+
+  <admin>
+    <web listen="127.0.0.1:8179" enable="True" secure="False" refresh="100"></web>
+    <ssh listen="127.0.0.1:8178" enable="True"></ssh>
+    <user name="admin" password="..xpoEyRReGzk" access="full"></user><user></user>
+  </admin>
+
+  <logging file="logfile.log"></logging>
+
+  <manager hostCheckInterval="61">
+    <hostCheck interval="71"></hostCheck>
+    <configCheck interval="81"></configCheck>
+    <heartbeat interval="50"></heartbeat>
+  </manager>
+
+</config>

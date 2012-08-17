@@ -21,8 +21,6 @@ members_to_delete = set([])
 
 ### Constants ################################################################
 ITEMKEY = "members"
-#ATTRIBUTENAME = "members_list"
-#GLUE = "&&&"
 
 ### Functions ################################################################
 def getRandomWaitTimeMillis():
