@@ -9,7 +9,6 @@ from twisted.internet import reactor
 
 # Local Imports
 import aggregation
-import timber
 import gossip
 import config
 import logger
@@ -36,8 +35,8 @@ def parse_args():
     arguments = Args()
 
     parser = argparse.ArgumentParser(
-        description="--------------Timber/Hiss Settings --------------------",
-        epilog="-------------------------------------------------------")
+        description="-------------- Hiss Settings --------------------",
+        epilog="--------------------------------------------------")
 
     parser.add_argument('--port', 
         default=config.DEFAULT_RECEIVE_PORT, 

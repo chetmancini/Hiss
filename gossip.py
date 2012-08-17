@@ -19,10 +19,14 @@ except ImportError: #Hack for Python2to3
 
 # External Library Imports
 from zope.interface import Interface, implements
+from twisted.web import server, resource, util
+from twisted.application import internet, service
 from twisted.internet import task, reactor
+from twisted.internet.protocol import Factory
 from twisted.internet.protocol import Protocol
 from twisted.internet.protocol import ServerFactory
 from twisted.internet.protocol import ReconnectingClientFactory
+from twisted.python import components, log
 
 # Local Imports
 import me
@@ -37,7 +41,23 @@ from debug import debug
 
 ### Globals ##################################################################
 
+### Editable
+APIS = {
+    'stats': HissStatsResource(),
+    }
+
+### No-edit
+__name__ = "Hiss"
+__summary__ = "Gossip on Twisted in Python"
+__version__ = "0.0.1"
+__web__ = "github.com/chetmancini"
+__author__ = "Chet Mancini"
+__author_email__ = "cam479 at cornell dot edu"
+__licence__ = "Apache"
+__warranty__ = "None"
+
 gossipqueue = Queue()
+
 
 ### Interfaces ###############################################################
 class IGossipServerProtocol(Interface):
@@ -58,6 +78,22 @@ class IGossipServerFactory(Interface):
 class IGossipClientFactory(Interface):
     """
     GossipClientFactory Interface
+    """
+
+### Methods ##################################################################
+
+def catchError(err):
+    return "Internal error in server"
+
+def getHead():
+    return """
+    <div style='font-family:sans-serif;'>
+    <h1>Hiss API Access</h1>
+    """
+
+def getFoot():
+    return """
+    </div>
     """
 
 ### Classes ##################################################################
@@ -343,6 +379,102 @@ class GossipClientFactory(ReconnectingClientFactory):
                 debug(ge.__str__(), error=True)
 
 
+class HissRootResource(resource.Resource):
+    """
+    Hiss api root resource
+    """
+
+    def render_GET(self, request):
+        """
+        get response method for the root resource
+        localhost:8000/
+        """
+        debug("GET request received at Root on " + \
+            me.getMe().getIp(), info=True, threshold=3)
+        return 'Welcome to the REST API'
+
+    def getChild(self, name, request):
+        """
+        We overrite the get child function so that we can handle invalid
+        requests
+        """
+        if name == '':
+            return self
+        else:
+            if name in APIS.keys():
+                return resource.Resource.getChild(self, name, request)
+            else:
+                return PageNotFoundError()
+
+class HissStatsResource(resource.Resource):
+    """
+    Resource for getting server stats.
+    """
+
+    def render_GET(self, request):
+        """
+        Get statistics for this node and the system
+        """
+        debug("Recevied GET on stat resouce")
+        requestDict = request.__dict__
+        requestArgs = request.args
+
+        if 'name' in requestArgs:
+            name = requestArgs['name'][0]
+            if name == 'all':
+                aggDict = {}
+                for name in aggregation.STATISTICS:
+                    aggDict[name] = aggregation.getAggregation(name)
+                return json.dumps(aggDict)
+            elif name in aggregation.STATISTICS:
+                aggDict = aggregation.getAggregation(name)
+                debug("Sent Stat response for " + name, 
+                    success=True, threshold=2)
+                return json.dumps(aggDict)
+            else:
+                return "Not a valid statistic name. Try: '" + \
+                    + "' | '".join(aggregation.STATISTICS.keys()) + "'"
+        else:
+            ret = getHead()
+            ret += "<p>Set a 'name' GET parameter to:</p><ul>"
+            for key in aggregation.STATISTICS:
+                ret += "<li><a href='?name="+key+"'>"+key+"</a></li>"
+            ret += "</ul>"
+            ret += getFoot()
+            return ret
+
+    def render_POST(self, request):
+        """
+        Post data to statistics. Not currently supported.
+        """
+        debug("Invalid stats POST access", info=True)
+        ret = getHead()
+        ret += "<p>POST access not provided.</p>"
+        ret += "<p>Set a 'name' GET parameter to:</p><ul>"
+        for key in aggregation.STATISTICS:
+            ret += "<li><a href='?name="+key+"'>"+key+"</a></li>"
+        ret += "</ul>" + getFoot()
+        return ret
+
+class PageNotFoundError(resource.Resource):
+    """
+    Page not found error.
+    """
+
+    def render_GET(self, request):
+        """
+        Render page not found for GET requests
+        """
+        debug("404 error")
+        return '404 Error: Not Found.'
+
+    def render_POST(self, request):
+        """
+        Render page not found for POST requests
+        """
+        debug("POST to page not found? wtf.")
+        return '404 Error: Not found.'
+
 ### Factories ################################################################
 gossipServerFactory = None
 gossipClientFactory = None
@@ -401,10 +533,26 @@ def quitMembersRefresh():
     """
     gossipServerFactory.membersRefreshDone()
 
+def apiRun():
+    """
+    Run the Timber API on the reactor.
+    """
+    root = HissRootResource()
+    for name,resource in enumerate(APIS):
+        root.putChild(name, resource)
+
+    hiss_factory = server.Site(root)
+
+    debug("Launching Hiss api listener on port " \
+        + str(config.LOG_PORT) + ".", info=True)
+    
+    reactor.listenTCP(config.LOG_PORT, hiss_factory)
+
 ### Main #####################################################################
 if __name__ == "__main__":
     """
     This allows one to run gossip directly without other APIs
     """
     gossipRun()
+    apiRun()
     reactor.run()
