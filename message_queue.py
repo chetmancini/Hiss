@@ -33,10 +33,10 @@ DURABLE = False
 DURABLE_MODE = 2 if DURABLE else 1
 
 VHOST = "/"
-EXCHANGE_NAME = "timber_exchange"
-QUEUE_NAME = "timber_queue"
-ROUTING_KEY = "timber_routing_key"
-CONSUMER_TAG = "timber_consumer_tag"
+EXCHANGE_NAME = "hiss_exchange"
+QUEUE_NAME = "hiss_queue"
+ROUTING_KEY = "hiss_routing_key"
+CONSUMER_TAG = "hiss_consumer_tag"
 
 NON_PERSISTENT = 1
 PERSISTENT = 2
@@ -100,7 +100,6 @@ def producer_cleanUp(conn, chan):
     # carefully; the txamqp.protocol.AMQPClient creates an initial channel with
     # id 0 when it first starts; we get this channel so that we can close it
     chan = yield conn.channel(0)
-    # close the virtual connection (channel)
     yield chan.connection_close()
     reactor.stop()
     returnValue(None)
@@ -115,7 +114,6 @@ def consumer_getQueue(conn, chan):
     yield chan.exchange_declare(
         exchange=common.EXCHANGE_NAME, type="direct",
         durable=False, auto_delete=True)
-    # create a message queue on the message server
     yield chan.queue_declare(
         queue=common.QUEUE_NAME, durable=False, exclusive=False,
         auto_delete=True)

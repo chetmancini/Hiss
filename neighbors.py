@@ -7,6 +7,13 @@
 #                                                                            #
 ##############################################################################
 
+#----------------------------------------------------------------------------#
+# neighbors.py                                                               #
+# Strategy pattern for choosing neighbor nodes to gossip with.               #
+# These could vary based on datacenter configuration or perhaps acadmic      #
+# interest.                                                                  #
+#----------------------------------------------------------------------------#
+
 ### Imports ##################################################################
 # Python Library Imports
 import random
@@ -17,7 +24,6 @@ import zope.interface
 # Local Imports
 import me
 import connections
-
 
 ### Interfaces ###############################################################
 class INeighborStrategy(zope.interface.Interface):
