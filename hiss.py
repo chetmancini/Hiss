@@ -47,15 +47,6 @@ APIS = {
     }
 
 ### No-edit
-__name__ = "Hiss"
-__summary__ = "Gossip on Twisted in Python"
-__version__ = "0.0.1"
-__web__ = "github.com/chetmancini"
-__author__ = "Chet Mancini"
-__author_email__ = "cam479 at cornell dot edu"
-__licence__ = "Apache"
-__warranty__ = "None"
-
 gossipqueue = Queue()
 
 
