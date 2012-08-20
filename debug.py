@@ -134,7 +134,7 @@ if __name__ == "__main__":
     import nodes
     import gossip
     import logger
-    import timber_exceptions
+    import hiss_exceptions
     import vectorClock
     import message
     import message_queue

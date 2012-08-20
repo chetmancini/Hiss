@@ -15,7 +15,7 @@ import boto
 
 # Local Imports
 import config
-from timber_exceptions import GeneralError
+from hiss_exceptions import GeneralError
 from debug import debug
 
 ### Variables ################################################################

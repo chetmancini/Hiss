@@ -27,7 +27,7 @@ import connections
 import me
 import vectorClock
 from debug import debug
-from timber_exceptions import GeneralError
+from hiss_exceptions import GeneralError
 
 ### Classes ##################################################################
 class INode(zope.interface.Interface):

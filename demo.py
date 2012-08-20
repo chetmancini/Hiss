@@ -317,7 +317,7 @@ def parse_args():
     """
     arguments = Args()
     parser = argparse.ArgumentParser(
-        description="------------Timber/Hiss Settings ----------------",
+        description="------------- Hiss Settings -----------------",
         epilog="-------------------------------------------------")
 
     parser.add_argument('--count', 

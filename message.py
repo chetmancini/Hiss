@@ -20,7 +20,7 @@ import config
 import me
 import vectorClock
 import connections
-from timber_exceptions import GeneralError, ConnectionError
+from hiss_exceptions import GeneralError, ConnectionError
 from debug import debug
 
 ### Message Interface ########################################################

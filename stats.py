@@ -28,7 +28,7 @@ from debug import debug
 ### Global Node Variables ####################################################
 p = psutil.Process(os.getpid())
 
-timber_io_stat = p.get_io_counters()
+hiss_io_stat = p.get_io_counters()
 disk_io_stat = psutil.disk_io_counters()
 network_io_stat = psutil.network_io_counters()
 
@@ -56,12 +56,12 @@ def init_stats():
     Initialization for stats. Not used currently
     """
     global p
-    global timber_io_stat
+    global hiss_io_stat
     global disk_io_stat
     global network_io_stat
 
     p = psutil.Process(os.getpid())
-    timber_io_stat = p.get_io_counters()
+    hiss_io_stat = p.get_io_counters()
     disk_io_stat = psutil.disk_io_counters()
     network_io_stat = psutil.network_io_counters()
 
@@ -271,33 +271,33 @@ def averagePacketSize():
 
 
 # Application & Process #
-def timber_thread_count():
+def hiss_thread_count():
     """
     Return the number of threads in this application
     """
     return p.get_num_threads()
 
-def timber_load():
+def hiss_load():
     """
-    Calculate Timber's IO load since the last call
+    Calculate hiss's IO load since the last call
     """
     #io(read_count=454556, write_count=3456, read_bytes=110592, write_bytes=0)
-    global timber_io_stat
+    global hiss_io_stat
     try:
         new_stat = p.get_io_counters()
-        readCount = new_stat.read_count - timber_io_stat.read_count
-        writeCount = new_stat.write_count - timber_io_stat.write_count
-        readBytes = new_stat.read_bytes - timber_io_stat.read_bytes
-        writeBytes = new_stat.write_bytes - timber_io_stat.write_bytes
+        readCount = new_stat.read_count - hiss_io_stat.read_count
+        writeCount = new_stat.write_count - hiss_io_stat.write_count
+        readBytes = new_stat.read_bytes - hiss_io_stat.read_bytes
+        writeBytes = new_stat.write_bytes - hiss_io_stat.write_bytes
 
-        timber_io_stat = new_stat
+        hiss_io_stat = new_stat
 
         return readCount,writeCount,readBytes,writeBytes
     except Exception as e:
         debug(e)
-        debug("Timber load data pulled failed", error=True)
+        debug("Hiss load data pulled failed", error=True)
 
-def timber_node_count():
+def hiss_node_count():
     """
     The number of nodes this thinks are in the system
     """

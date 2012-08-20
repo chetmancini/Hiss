@@ -35,8 +35,8 @@ Gossip settings
 
 QUEUE_PROVIDER = "RabbitMQ"
 
-QUEUE_LOG_NAME = "timber_log"
-QUEUE_COMMUNICATION_BUS_NAME = "timber_bus"
+QUEUE_LOG_NAME = "hiss_log"
+QUEUE_COMMUNICATION_BUS_NAME = "hiss_bus"
 QUEUE_USERNAME = "guest"
 QUEUE_PASSWORD = "guest"
 QUEUE_HOST = "localhost"

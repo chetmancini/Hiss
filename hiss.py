@@ -36,7 +36,7 @@ import message
 import aggregation
 import membership
 import message_queue
-from timber_exceptions import GeneralError, ConnectionError
+from hiss_exceptions import GeneralError, ConnectionError
 from debug import debug
 
 ### Globals ##################################################################
@@ -526,7 +526,7 @@ def quitMembersRefresh():
 
 def apiRun():
     """
-    Run the Timber API on the reactor.
+    Run the Hiss API on the reactor.
     """
     root = HissRootResource()
     for name,resource in enumerate(APIS):
