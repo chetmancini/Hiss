@@ -21,7 +21,7 @@ import psutil
 
 # Local Imports
 import config
-import me
+import hiss
 import connections
 from debug import debug
 
@@ -255,7 +255,7 @@ def network_load_single_stat():
     """
     receivedPackets,sentPackets,receivedBytes,sentBytes = network_load()
 
-    debug("Load#"+me.getUid()+"#"+str(receivedPackets+sentPackets), 
+    debug("Load#"+hiss.getUid()+"#"+str(receivedPackets+sentPackets), 
         monitor=True)
     
     return receivedBytes + sentBytes

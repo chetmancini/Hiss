@@ -23,8 +23,7 @@ import zope.interface
 
 # Local Imports
 import config
-import me
-import gossip
+import hiss
 import message
 import nodes
 import membership
@@ -188,8 +187,8 @@ def init():
     global neighborStrategy
 
     me.init(nodes.CurrentNode())
-    debug("Init called. Node is " + me.getUid(), info=True)
-    debug("#".join(["New", me.getMe().getShortUid(), me.getUid()]), 
+    debug("Init called. Node is " + hiss.getUid(), info=True)
+    debug("#".join(["New", hiss.getMe().getShortUid(), hiss.getUid()]), 
         monitor=True)
 
     neighborStrategy = neighbors.neighborStrategyFactory(
@@ -212,7 +211,7 @@ def maintainMembers():
     # Add in new nodes.
     tempUniverse = membership.getCurrentMemberDict()
     for uid in tempUniverse:
-        if uid not in universe and not me.getMe().__eq__(tempUniverse[uid]):
+        if uid not in universe and not hiss.getMe().__eq__(tempUniverse[uid]):
             universe[uid] = nodes.ExternalNode.fromBase(tempUniverse[uid])
         if uid in possibledead:
             possibledead.remove(uid)
@@ -222,7 +221,7 @@ def maintainMembers():
         deadNode(dead)
 
     # should I add me in here? not sure.
-    universe[me.getMe().getUid()] = me.getMe()
+    universe[hiss.getMe().getUid()] = hiss.getMe()
 
     debug("has a universe of size: " + str(len(universe)), info=True)
 
@@ -327,7 +326,7 @@ def informAlive():
     Inform my peers I exist (for new nodes to system)
     """
     alivemessage = message.NewNodeMessage(
-        (me.getMe().getUidAsObject(), me.getMe().getPort()))
+        (hiss.getMe().getUidAsObject(), hiss.getMe().getPort()))
     alivemessage.send()
     debug("Informing friends I am alive", info=True)
 
