@@ -39,16 +39,39 @@ import message_queue
 from hiss_exceptions import GeneralError, ConnectionError
 from debug import debug
 
-### Globals ##################################################################
 
-### Editable
+### Editable Settings ########################################################
 APIS = {
     'stats': HissStatsResource(),
     }
 
-### No-edit
+### Globals ##################################################################
 gossipqueue = Queue()
 
+me = None
+
+### Me Functions #############################################################
+def init(node):
+    """
+    Initialize me with a new node.
+    """
+    global me
+    me = node
+
+def getUid():
+    """
+    convenience method to get the uid in hex of this node.
+    """
+    if me:
+        return me.getUid()
+    else:
+        return None
+
+def getMe():
+    """
+    Getter function for this node.
+    """
+    return me
 
 ### Interfaces ###############################################################
 class IGossipServerProtocol(Interface):
@@ -369,10 +392,10 @@ class GossipClientFactory(ReconnectingClientFactory):
             except GeneralError as ge:
                 debug(ge.__str__(), error=True)
 
-
+### Classes for the REST API #################################################
 class HissRootResource(resource.Resource):
     """
-    Hiss api root resource
+    Hiss api root resource. This is generally not called.
     """
 
     def render_GET(self, request):
