@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-3d-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-3d-demos-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-algorithms-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-api-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-graph-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-jai-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-jai-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-samples-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/jung-visualization-2.0.1.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/home/chet/bin/joda-time-2.1.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
