@@ -10,6 +10,7 @@
 ### Imports ##################################################################
 import zope.interface
 
+### Interfaces ###############################################################
 class IError(zope.interface.Interface):
     pass
 

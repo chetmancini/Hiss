@@ -1,10 +1,9 @@
 ##############################################################################
-#  .___________. __  .___  ___. .______    _______ .______                   #
-#  |           ||  | |   \/   | |   _  \  |   ____||   _  \                  #
-#  `---|  |----`|  | |  \  /  | |  |_)  | |  |__   |  |_)  |                 #
-#      |  |     |  | |  |\/|  | |   _  <  |   __|  |      /                  #
-#      |  |     |  | |  |  |  | |  |_)  | |  |____ |  |\  \----.             #
-#      |__|     |__| |__|  |__| |______/  |_______|| _| `._____|             #
+#        __  ___                                                             #
+#       / / / (_)_________                                                   #
+#      / /_/ / / ___/ ___/                                                   #
+#     / __  / (__  |__  )                                                    #
+#    /_/ /_/_/____/____/        Gossip with Python on Twisted                #
 #                                                                            #
 ##############################################################################
 
@@ -27,7 +26,6 @@ import zope.interface
 import me
 import config
 import connections
-import logger
 import stats
 
 ### Interfaces ###############################################################
@@ -527,9 +525,6 @@ def stats_init():
 
     NODE_COUNT = UpdateAggregator(
         'nodecount', stats.timber_node_count)
-
-    LOG_COUNT = UpdateAggregator(
-        'logcount', logger.logCount)
 
     STATISTICS = {
         'diskavailable': DISK_AVAILABLE, 

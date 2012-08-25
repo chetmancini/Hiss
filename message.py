@@ -69,7 +69,7 @@ class IMessage(zope.interface.Interface):
         Messages must have a string representation
         """
 
-class IMessageDispatcher(Interface):
+class IMessageDispatcher(zope.interface.Interface):
     """
     Message dispatcher interface
     """
@@ -715,7 +715,7 @@ class MessageDispatcher:
     """
     Concrete message dispatcher
     """
-    implements(IMessageDispatcher)
+    zope.interface.implements(IMessageDispatcher)
 
     def __init__(self):
         """

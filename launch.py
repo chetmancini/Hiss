@@ -20,7 +20,6 @@ from twisted.internet import reactor
 import aggregation
 import gossip
 import config
-import logger
 import connections
 from debug import debug
 
