@@ -146,7 +146,6 @@ if __name__ == "__main__":
     import demo
     import client_controller
 
-
     py = countLinesOfCode('.', 'py')
     client = countLinesOfCode('./client/', 'py')
     jav = countLinesOfCode('monitor/', 'java')

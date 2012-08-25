@@ -54,4 +54,4 @@ Execute:
     --iface             Interface (default localhost)
 
 ## Changelog
-08/25/2012 Cleaned out most of the old code from school project.
+* 08/25/2012 Cleaned out most of the old code from school project.
