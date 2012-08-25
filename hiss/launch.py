@@ -71,7 +71,7 @@ def parse_args():
 
     parser.add_argument('--version', 
         action='version', 
-        version=timber.__version__,
+        version=hiss.__version__,
         help='Report system version.')
 
     parser.parse_args(namespace=arguments)
