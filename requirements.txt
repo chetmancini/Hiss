@@ -1,5 +1,6 @@
-twisted
-boto
-psutil
-networkx
-txLoadBalancer
+Hiss
+Twisted>=11.0.0
+boto>=2.2.2
+psutil>=0.4.1
+networkx>=1.6
+txLoadBalancer>=1.1.0

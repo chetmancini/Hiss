@@ -25,7 +25,6 @@ import zope.interface
 # Local imports
 import config
 import connections
-import logger
 import stats
 
 ### Interfaces ###############################################################
@@ -525,9 +524,6 @@ def stats_init():
 
     NODE_COUNT = UpdateAggregator(
         'nodecount', stats.timber_node_count)
-
-    LOG_COUNT = UpdateAggregator(
-        'logcount', logger.logCount)
 
     STATISTICS = {
         'diskavailable': DISK_AVAILABLE, 

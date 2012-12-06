@@ -19,7 +19,8 @@ import copy
 # Local Imports
 import simpledb
 import nodes
-import hiss
+import me
+import gossip
 import connections
 from debug import debug
 
@@ -74,7 +75,7 @@ def membersRefresh():
             for memberUid in newMembersDict:
                 if len(memberUid) > 6:
                     memberNode = nodes.buildNode(newMembersDict[memberUid])
-                    if not hiss.getMe().__eq__(memberNode):
+                    if not me.getMe().__eq__(memberNode):
                         result = True # TODO Really should send a noop.
                         if result:
                             members[memberNode.getUid()] = memberNode
@@ -82,7 +83,7 @@ def membersRefresh():
                             debug("Noop failed. Node removed.", info=True)
                     else:
                         pass
-        members[his.getUid()] = hiss.getMe().getBaseData()
+        members[me.getMe().getUid()] = me.getMe().getBaseData()
 
         for key in members:
             if key in members_to_delete:
@@ -94,7 +95,7 @@ def membersRefresh():
 
         if set(members.keys()) == oldKeys:
             """ We have reached stable state """
-            hiss.quitMembersRefresh()
+            gossip.quitMembersRefresh()
             connections.informAlive()
             
     except Exception as e:

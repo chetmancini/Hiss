@@ -18,7 +18,7 @@ except ImportError: #Hack for Python2to3
     from queue import Queue, Empty
 
 # External Library Imports
-from zope.interface import Interface, implements
+import zope.interface
 from twisted.web import server, resource, util
 from twisted.application import internet, service
 from twisted.internet import task, reactor
@@ -39,57 +39,31 @@ import message_queue
 from hiss_exceptions import GeneralError, ConnectionError
 from debug import debug
 
-
 ### Editable Settings ########################################################
 APIS = {
-    'stats': HissStatsResource(),
+    #'stats': HissStatsResource(),
     }
 
 ### Globals ##################################################################
 gossipqueue = Queue()
 
-me = None
-
-### Me Functions #############################################################
-def init(node):
-    """
-    Initialize me with a new node.
-    """
-    global me
-    me = node
-
-def getUid():
-    """
-    convenience method to get the uid in hex of this node.
-    """
-    if me:
-        return me.getUid()
-    else:
-        return None
-
-def getMe():
-    """
-    Getter function for this node.
-    """
-    return me
-
 ### Interfaces ###############################################################
-class IGossipServerProtocol(Interface):
+class IGossipServerProtocol(zope.interface.Interface):
     """
     GossipServerProtocol Interface
     """
 
-class IGossipClientProtocol(Interface):
+class IGossipClientProtocol(zope.interface.Interface):
     """
     GossipClientProtocol Interface
     """
 
-class IGossipServerFactory(Interface):
+class IGossipServerFactory(zope.interface.Interface):
     """
     GossipServerFactory Interface
     """
 
-class IGossipClientFactory(Interface):
+class IGossipClientFactory(zope.interface.Interface):
     """
     GossipClientFactory Interface
     """
@@ -117,7 +91,7 @@ class GossipServerProtocol(Protocol):
     Gossip server protocol
     """
 
-    implements(IGossipServerProtocol)
+    zope.interface.implements(IGossipServerProtocol)
 
     def connectionMade(self):
         """
@@ -158,7 +132,7 @@ class GossipClientProtocol(Protocol):
     """
     Gossip client protocol
     """
-    implements(IGossipClientProtocol)
+    zope.interface.implements(IGossipClientProtocol)
 
     def connectionMade(self):
         """
@@ -203,7 +177,7 @@ class GossipServerFactory(ServerFactory):
     Gossip Factory
     """
 
-    implements(IGossipServerFactory)
+    zope.interface.implements(IGossipServerFactory)
 
     protocol = GossipServerProtocol
     """
@@ -269,7 +243,7 @@ class GossipClientFactory(ReconnectingClientFactory):
     Factory for gossip clients
     """
 
-    implements(IGossipServerFactory)
+    zope.interface.implements(IGossipServerFactory)
 
     protocol = GossipClientProtocol
 

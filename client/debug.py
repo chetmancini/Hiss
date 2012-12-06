@@ -75,7 +75,7 @@ def debug(
 
     if not shortUid:
         try:
-            shortUid = me.getMe().getShortUid()
+            shortUid = hiss.getMe().getShortUid()
         except:
             shortUid = ""
 
@@ -133,7 +133,6 @@ if __name__ == "__main__":
     import launch
     import nodes
     import gossip
-    import logger
     import hiss_exceptions
     import vectorClock
     import message
@@ -141,13 +140,11 @@ if __name__ == "__main__":
     import membership
     import neighbors
     import simpledb
-    import timber
     import stats
     import connections
     import aggregation
     import demo
-    import controller
-
+    import client_controller
 
     py = countLinesOfCode('.', 'py')
     client = countLinesOfCode('./client/', 'py')
