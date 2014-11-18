@@ -51,14 +51,14 @@ Put files in directory
 Execute:
 
 ```
-    $ python launch.py
+$ python launch.py
 
-    Command line arguments:
-    -h                  Print help
-    --version           Print version
-    --port              Hiss port
-    --interval          Gossip interval (seconds)
-    --iface             Interface (default localhost)
+Command line arguments:
+-h                  Print help
+--version           Print version
+--port              Hiss port
+--interval          Gossip interval (seconds)
+--iface             Interface (default localhost)
 ```
 
 ## Changelog
